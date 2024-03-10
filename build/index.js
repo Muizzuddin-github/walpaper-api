@@ -50,7 +50,16 @@ app.get("/api/walpaper/:src", (req, res) => __awaiter(void 0, void 0, void 0, fu
     var _a, _b;
     try {
         const src = req.params.src;
-        const result = yield axios_1.default.post(`${process.env.URL}${src}`);
+        const page = req.query.page || "1";
+        if (Array.isArray(page)) {
+            res.status(400).json({ errors: ["only one query string of page"] });
+            return;
+        }
+        if (isNaN(+page)) {
+            res.status(400).json({ errors: ["page query only number"] });
+            return;
+        }
+        const result = yield axios_1.default.post(`${process.env.URL}${src}/${page}`);
         const $ = cheerio.load(result.data);
         const dataUrl = [];
         const ul = $("div.container-2 ul.image-gallery-items");

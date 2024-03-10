@@ -16,9 +16,20 @@ app.get("/", (req: Request, res: Response) => {
 app.get("/api/walpaper/:src", async (req: Request, res: Response) => {
   try {
     const src: string = req.params.src;
+    const page = req.query.page || "1";
+
+    if (Array.isArray(page)) {
+      res.status(400).json({ errors: ["only one query string of page"] });
+      return;
+    }
+
+    if (isNaN(+page)) {
+      res.status(400).json({ errors: ["page query only number"] });
+      return;
+    }
 
     const result: AxiosResponse<string> = await axios.post(
-      `${process.env.URL}${src}`
+      `${process.env.URL}${src}/${page}`
     );
 
     const $: cheerio.CheerioAPI = cheerio.load(result.data);
