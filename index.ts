@@ -35,7 +35,7 @@ app.get("/api/walpaper/:src", async (req: Request, res: Response) => {
           .find("img");
         const url: string | undefined = img.attr("src");
         if (url) {
-          dataUrl.push(url);
+          dataUrl.push(url + "?w=600&r=0.5625");
         }
       });
 
