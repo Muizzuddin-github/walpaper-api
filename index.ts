@@ -7,7 +7,14 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app: express.Application = express();
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://portfolio-backend-azure-gamma.vercel.app",
+    ],
+  })
+);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("okeh");

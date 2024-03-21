@@ -42,7 +42,12 @@ const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-app.use((0, cors_1.default)({ origin: "http://localhost:5173" }));
+app.use((0, cors_1.default)({
+    origin: [
+        "http://localhost:5173",
+        "https://portfolio-backend-azure-gamma.vercel.app",
+    ],
+}));
 app.get("/", (req, res) => {
     res.send("okeh");
 });
