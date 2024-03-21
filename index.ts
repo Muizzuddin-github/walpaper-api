@@ -9,10 +9,7 @@ dotenv.config();
 const app: express.Application = express();
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://portfolio-backend-azure-gamma.vercel.app",
-    ],
+    origin: ["http://localhost:5173", "https://muhammad-muizzuddin.vercel.app"],
   })
 );
 
